@@ -35,7 +35,7 @@ model.fit(train_X, train_y)
 print(f"model input:\n{train_X[:5]}")
 print(f"model ground truth:\n{train_y[:5]}\n")
 print(f"model probability predictions: \n{model.predict_proba(train_X)[:5]}\n") # decison threshold is 0.5
-print(f"model decision function: \n{model.decision_function(train_X)[:5]}\n") # decision threshold is 0
+# print(f"model decision function: \n{reduced_df.columns}\n{model.decision_function(train_X)}\n") # decision threshold is 0
 print(f"model validation performance: {model.score(val_X, val_y)}")
 print(f"model test performance: {model.score(test_X, test_y)}\n")
 
@@ -45,3 +45,7 @@ for row in model.predict_proba(train_X):
     if row[0] > 0.25 and row[0] < 0.75:
         middle_total += 1
 print("Count of probabilities in middle (0.25-0.75):", middle_total)
+# model weights
+weights = pd.Series(model.coef_[0], index=reduced_df.columns.drop('suicide intent'))
+intercept = model.intercept_
+print(f"model weights of different features: \n{weights.sort_values(ascending=False)}\nintercept: {intercept}")

@@ -1,0 +1,6 @@
+*.bin
+__pycache__/
+.DS_Store
+bart-base/
+*.pt
+*.safetensors
